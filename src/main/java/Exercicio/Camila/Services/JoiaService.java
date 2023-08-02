@@ -1,5 +1,8 @@
 package Exercicio.Camila.Services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +29,17 @@ public class JoiaService {
                 joiaRequestDTO.getMaterial(), joiaRequestDTO.getQuantidade(), joiaRequestDTO.getTipo());
     }
 
-    public JoiaResponseDTO buscarJoiaPorTipo(String tipo) {
-        Joia joiaEncontrada = cadastroJoia.buscarJoiaPorTipo(tipo);
-        if (joiaEncontrada != null) {
-            return new JoiaResponseDTO(joiaEncontrada.getValor(), joiaEncontrada.getPeso(),
-                    joiaEncontrada.getMaterial(), joiaEncontrada.getQuantidade(), joiaEncontrada.getTipo());
-        } else {
-            return null;
+    public List<JoiaResponseDTO> buscarJoiasPorTipo(String tipo) {
+        List<Joia> joiasEncontradas = cadastroJoia.buscarJoiaPorTipo(tipo);
+        List<JoiaResponseDTO> joiasResponseDTO = new ArrayList<>();
+
+        for (Joia joia : joiasEncontradas) {
+            JoiaResponseDTO dto = new JoiaResponseDTO(joia.getValor(), joia.getPeso(),
+                    joia.getMaterial(), joia.getQuantidade(), joia.getTipo());
+            joiasResponseDTO.add(dto);
         }
+
+        return joiasResponseDTO;
     }
 
     public String tipoComMaisValor() {

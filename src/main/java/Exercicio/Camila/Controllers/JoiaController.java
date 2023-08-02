@@ -1,5 +1,7 @@
 package Exercicio.Camila.Controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +31,10 @@ public class JoiaController {
     }
 
     @GetMapping("/{tipo}")
-    public ResponseEntity<JoiaResponseDTO> buscarJoiaPorTipo(@PathVariable String tipo) {
-        JoiaResponseDTO joiaResponseDTO = joiaService.buscarJoiaPorTipo(tipo);
-        if (joiaResponseDTO != null) {
-            return new ResponseEntity<>(joiaResponseDTO, HttpStatus.OK);
+    public ResponseEntity<List<JoiaResponseDTO>> buscarJoiaPorTipo(@PathVariable String tipo) {
+        List<JoiaResponseDTO> joiasResponseDTO = joiaService.buscarJoiasPorTipo(tipo);
+        if (!joiasResponseDTO.isEmpty()) {
+            return new ResponseEntity<>(joiasResponseDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -24,8 +24,8 @@ public class CadastroJoia {
 
     }
 
-    public Joia buscarJoiaPorTipo(String tipo) {
-        return joiaRepository.findByTipo(tipo);
+    public List<Joia> buscarJoiaPorTipo(String tipo) {
+        return joiaRepository.findAllByTipo(tipo);
     }
 
     public String tipoComMaisValor() {
