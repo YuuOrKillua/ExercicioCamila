@@ -38,9 +38,9 @@ public class JoiaController {
         }
     }
 
-    @GetMapping("/maior-valor")
-    public ResponseEntity<String> tipoMaiorValor() {
-        String tipoMaiorValor = joiaService.tipoMaiorValor();
+    @GetMapping("/tipo-com-maior-valor")
+    public ResponseEntity<String> tipoComMaisValor() {
+        String tipoMaiorValor = joiaService.tipoComMaisValor();
         if (tipoMaiorValor != null) {
             return new ResponseEntity<>(tipoMaiorValor, HttpStatus.OK);
         } else {

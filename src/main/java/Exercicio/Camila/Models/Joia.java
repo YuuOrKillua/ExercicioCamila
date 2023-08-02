@@ -23,6 +23,10 @@ public class Joia {
     private int quantidade;
     private String tipo;
 
+    public Joia() {
+        
+    }
+
     public Joia(double valor, double peso, String material, int quantidade, String tipo) {
         this.valor = valor;
         this.peso = peso;

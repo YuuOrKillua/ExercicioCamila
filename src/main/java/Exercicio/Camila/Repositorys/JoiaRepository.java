@@ -7,5 +7,5 @@ import Exercicio.Camila.Models.Joia;
 
 @Repository
 public interface JoiaRepository extends JpaRepository<Joia, Long> {
-    
+    Joia findByTipo(String tipo);
 }

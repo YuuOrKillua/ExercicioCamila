@@ -1,46 +1,44 @@
 package Exercicio.Camila.Services;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Exercicio.Camila.Models.Joia;
+import Exercicio.Camila.Repositorys.JoiaRepository;
 
 @Service
 public class CadastroJoia {
-    private List<Joia> joias;
+    private JoiaRepository joiaRepository;
 
-    public CadastroJoia() {
-        joias = new ArrayList<>();
+    @Autowired
+    public CadastroJoia(JoiaRepository joiaRepository) {
+        this.joiaRepository = joiaRepository;
     }
 
     public void cadastrarJoia(double valor, double peso, String material, int quantidade, String tipo) {
         Joia joia = new Joia(valor, peso, material, quantidade, tipo);
-        joias.add(joia);
+        joiaRepository.save(joia);
+
     }
 
     public Joia buscarJoiaPorTipo(String tipo) {
-        for (Joia joia : joias) {
-            if (joia.getTipo().equalsIgnoreCase(tipo)) {
-                return joia;
-            }
-        }
-        return null;
+        return joiaRepository.findByTipo(tipo);
     }
 
     public String tipoComMaisValor() {
+        List<Joia> joias = joiaRepository.findAll();
         if (joias.isEmpty()) {
             return null;
         }
 
-        Joia maiorValorJoia = joias.get(0);
-        for (Joia joia : joias) {
-            if (joia.getValor() > maiorValorJoia.getValor()) {
-                maiorValorJoia = joia;
-            }
+        Joia maiorValorJoia = joias.stream().max(Comparator.comparingDouble(Joia::getValor)).orElse(null);
+        if (maiorValorJoia != null) {
+            return maiorValorJoia.getTipo();
+        } else {
+            return null;
         }
-
-        return maiorValorJoia.getTipo();
     }
 }

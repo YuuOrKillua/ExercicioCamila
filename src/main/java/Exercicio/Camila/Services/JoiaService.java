@@ -36,7 +36,7 @@ public class JoiaService {
         }
     }
 
-    public String tipoMaiorValor() {
+    public String tipoComMaisValor() {
         return cadastroJoia.tipoComMaisValor();
     }
 }
