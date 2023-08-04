@@ -1,7 +1,7 @@
 package Exercicio.Camila.Services;
 
+import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class BuscarTipoComMaisValor {
     private JoiaRepository joiaRepository;
 
     public String tipoComMaisValor() {
-        List<Joia> joias = joiaRepository.findAll();
+        Collection<Joia> joias = joiaRepository.findAll();
         if (joias.isEmpty()) {
             return null;
         }
