@@ -23,7 +23,7 @@ public class Joia {
     private int quantidade;
     private String tipo;
 
-    public Joia() {
+    protected Joia() {
         
     }
 
