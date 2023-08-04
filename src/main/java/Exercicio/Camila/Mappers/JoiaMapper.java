@@ -20,16 +20,7 @@ public class JoiaMapper implements IJoiaMapper{
     public JoiaResponseDTO joiaParaJoiaResponse(Joia joia) {
         return new JoiaResponseDTO(joia.getValor(), joia.getPeso(), joia.getMaterial(), joia.getQuantidade(), joia.getTipo());
     }
-
-    @Override
-    public Collection<Joia> joiaRequestParaJoias(Collection<JoiaRequestDTO> joias) {
-        Collection<Joia> joiasMappeadas = new ArrayList<Joia>();
-        for (JoiaRequestDTO joia : joias) {
-            joiasMappeadas.add(joiaRequestParaJoia(joia));
-        }
-         return joiasMappeadas;
-    }
-
+    
     @Override
     public Collection<JoiaResponseDTO> joiaParaJoiasResponse(Collection<Joia> joias) {
         Collection<JoiaResponseDTO> joiasRespostamappeada = new ArrayList<JoiaResponseDTO>();

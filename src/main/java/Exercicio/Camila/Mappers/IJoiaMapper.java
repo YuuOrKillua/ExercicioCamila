@@ -12,8 +12,6 @@ public interface IJoiaMapper {
 
     public Joia joiaRequestParaJoia(JoiaRequestDTO joiaRequestDTO);
 
-    public Collection<Joia> joiaRequestParaJoias(Collection<JoiaRequestDTO> joias);
-
     public JoiaResponseDTO joiaParaJoiaResponse(Joia joia);
 
     public Collection<JoiaResponseDTO> joiaParaJoiasResponse(Collection<Joia> joias);
