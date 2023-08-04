@@ -1,6 +1,6 @@
 package Exercicio.Camila.Controllers;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import Exercicio.Camila.DTOs.Requests.JoiaRequestDTO;
 import Exercicio.Camila.DTOs.Responses.JoiaResponseDTO;
 import Exercicio.Camila.Services.BuscarJoiaPorTipo;
+import Exercicio.Camila.Services.BuscarTipoComMaisValor;
 import Exercicio.Camila.Services.CadastroJoia;
 
 @RestController
@@ -18,7 +19,10 @@ public class JoiaController {
 
     @Autowired
     private CadastroJoia cadastroJoia;
+    @Autowired
     private BuscarJoiaPorTipo buscarJoiaPorTipo;
+    @Autowired
+    private BuscarTipoComMaisValor buscarTipoComMaisValor;
 
     @PostMapping
     public ResponseEntity<JoiaResponseDTO> cadastrarJoia(@RequestBody JoiaRequestDTO joiaRequestDTO) {
@@ -27,8 +31,8 @@ public class JoiaController {
     }
 
     @GetMapping("/{tipo}")
-    public ResponseEntity<List<JoiaResponseDTO>> buscarJoiaPorTipo(@PathVariable String tipo) {
-        List<JoiaResponseDTO> joiasResponseDTO = buscarJoiaPorTipo.buscarJoiaPorTipo(tipo);
+    public ResponseEntity<Collection<JoiaResponseDTO>> buscarJoiaPorTipo(@PathVariable String tipo) {
+        Collection<JoiaResponseDTO> joiasResponseDTO = buscarJoiaPorTipo.buscarJoiaPorTipo(tipo);
         if (!joiasResponseDTO.isEmpty()) {
             return new ResponseEntity<>(joiasResponseDTO, HttpStatus.OK);
         } else {
@@ -38,7 +42,7 @@ public class JoiaController {
 
     @GetMapping("/tipo-com-maior-valor")
     public ResponseEntity<String> tipoComMaisValor() {
-        String tipoMaiorValor = joiaService.tipoComMaisValor();
+        String tipoMaiorValor = buscarTipoComMaisValor.tipoComMaisValor();
         if (tipoMaiorValor != null) {
             return new ResponseEntity<>(tipoMaiorValor, HttpStatus.OK);
         } else {
